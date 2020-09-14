@@ -1,5 +1,5 @@
 import pandas as pd
-import cv2 as cv
+import cv2
 
 filename = "truth.csv"
 truth = pd.read_csv(filename)
@@ -27,13 +27,13 @@ for index, row in truth.iterrows():
         severity = ""
 
     filepath = image + ".pgm"
-    img = cv.imread(filepath, 0)
+    img = cv2.imread(filepath, 0)
 
     
     if class_ != 'NORM':
-        cv.circle(img, (x0, y0), radius, (0, 0, 255), thickness=1, lineType=8, shift=0)
+        cv2.circle(img, (x0, y0), radius, (0, 0, 255), thickness=1, lineType=8, shift=0)
 
-    font = cv.FONT_HERSHEY_SIMPLEX 
-    cv.putText(img, " ".join([background, class_, severity]), (text_x, text_y), font, 1, (255, 255, 255), 2, cv.LINE_AA) 
-    cv.imwrite("output/" + filepath, img)
+    font = cv2.FONT_HERSHEY_SIMPLEX 
+    cv2.putText(img, " ".join([background, class_, severity]), (text_x, text_y), font, 1, (255, 255, 255), 2, cv2.LINE_AA) 
+    cv2.imwrite("output/" + filepath, img)
 
