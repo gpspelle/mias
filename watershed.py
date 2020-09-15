@@ -15,8 +15,8 @@ filename = "truth.csv"
 truth = pd.read_csv(filename)
 
 mias_input = ""
-input = "clusterized_image/"
-output = "watershed/"
+input = ""
+output = "new_watershed/"
 
 for index, row in truth.iterrows():
     filename = row['image']
@@ -24,6 +24,8 @@ for index, row in truth.iterrows():
     filepath = input + filename + ".pgm"
 
     image = cv.imread(filepath, 0)
+    ret, thresh1 = cv.threshold(image, 18, 255, cv.THRESH_BINARY)
+    image = thresh1
 
     filepath = mias_input + filename + ".pgm" 
     original_image = cv.imread(filepath, 0)
