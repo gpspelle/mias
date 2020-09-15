@@ -54,17 +54,20 @@ for index, row in truth.iterrows():
     contours_areas = []
     contours_colors = []
     for c in contours:
-        area = cv.contourArea(c)
+        area = len(c)
         mask = np.zeros(image.shape, np.uint8)
+
         cv.drawContours(mask, c, -1, 255, -1)
+
         mean = cv.mean(original_image, mask=mask)[0]
 
-        if mean > 127:
+        if mean > 80:
             contours_colors.append(mean)
             contours_areas.append(area)
         else:
             contours_colors.append(0)
             contours_areas.append(0)
+
 
     biggest = np.argmax(contours_areas)
     mask = np.zeros(image.shape, np.uint8)
