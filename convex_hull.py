@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import cv2
 
+
 filename = "truth.csv"
 truth = pd.read_csv(filename)
 
@@ -23,17 +24,11 @@ for index, row in truth.iterrows():
         #find the biggest area of the contour
         c = max(contours, key = cv2.contourArea)
         hull = cv2.convexHull(c, False)
-        #for c in contours:
-        #    hull = cv2.convexHull(c, False)
-            #print(x, y, w, h)
-            # draw the 'human' contour (in green)
-            #cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            #img = cv2.drawContours(img, hull, -1, 255, thickness = -1)
 
-        #    for point1, point2 in zip(hull, hull[1:]): 
-        #        p1 = tuple(point1[0])
-        #        p2 = tuple(point2[0])
-        #        cv2.line(img, p1, p2, 255, 2) 
+            
+        img_hull = cv2.drawContours(img, hull, -1, 255, 5)
+        cv2.imshow(image, img_hull)
+        cv2.waitKey(0)
 
         for point1, point2 in zip(hull, hull[1:]): 
             p1 = tuple(point1[0])
